@@ -14,10 +14,15 @@ use Symfony\Component\HttpFoundation\Request;
 
 class BaseController extends Controller
 {
-    public function handleRequest()
+    public function handleRequest($service, $method, ...$args)
     {
-
+        if (method_exists($service, $method)) {
+            return $service->{$method}(...$args);
+        }
     }
 
     public function parseRequest(Request $request)
+    {
+
+    }
 }
